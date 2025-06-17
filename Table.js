@@ -1,7 +1,34 @@
 import React, { Fragment } from "react";
 
-const Table = (props) => {
-  const { applications } = props;
+const Table = React.memo(({ applications, search }) => {
+  // const { applications } = props;
+
+  console.log("Table Component Rendring...");
+
+  const filteredApplications = applications.filter(
+    (each) =>
+      (search.applicationType
+        ? each.application_type
+            .toLowerCase()
+            .includes(search.applicationType.toLowerCase())
+        : true) &&
+      (search.district
+        ? each.district_name
+            .toLowerCase()
+            .includes(search.district.toLowerCase())
+        : true) &&
+      (search.applicantName
+        ? each.applicant_name
+            .toLowerCase()
+            .includes(search.applicantName.toLowerCase())
+        : true) &&
+      (search.localityName
+        ? each.locality
+            .toLowerCase()
+            .includes(search.localityName.toLowerCase())
+        : true)
+  );
+
   return (
     <div>
       <h1 className="text-primary" style={{ textAlign: "center" }}>
@@ -26,7 +53,7 @@ const Table = (props) => {
           </tr>
         </thead>
         <tbody>
-          {applications?.map((each, index) => (
+          {filteredApplications?.map((each, index) => (
             <tr key={index}>
               <td>{each.id}</td>
               <td>{each.application_id}</td>
@@ -65,5 +92,5 @@ const Table = (props) => {
       </table>
     </div>
   );
-};
+});
 export default Table;
