@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-const Table = React.memo(({ applications, search }) => {
+const Table = ({ applications, search }) => {
   // const { applications } = props;
 
   console.log("Table Component Rendring...");
@@ -92,5 +92,5 @@ const Table = React.memo(({ applications, search }) => {
       </table>
     </div>
   );
-});
-export default Table;
+};
+export default React.memo(Table);
